@@ -1,5 +1,9 @@
 package project;
-
+/**
+ Clase que implementa un arbol binario de Huffman
+ @Author: <Kahyberth Steven Gonzales, Carlos Eduardo Guerrero, Juan Camilo Varela, Yuliana Serna>
+ @Version: <1>
+ **/
 class HuffmanBinaryTree {
   private HuffmanNode root;
 

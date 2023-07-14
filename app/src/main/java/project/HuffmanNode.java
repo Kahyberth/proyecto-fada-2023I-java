@@ -1,5 +1,9 @@
 package project;
-
+/**
+ Clase huffmanNode
+ @Author: <Kahyberth Steven Gonzales, Carlos Eduardo Guerrero, Juan Camilo Varela, Yuliana Serna>
+ @Version: <1>
+ */
 class HuffmanNode implements Comparable<HuffmanNode> {
     private char character;
     private int frequency;

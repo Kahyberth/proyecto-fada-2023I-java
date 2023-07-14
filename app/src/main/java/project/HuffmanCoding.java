@@ -2,6 +2,13 @@ package project;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
+
+/**
+ Clase huffmanCoding
+ Esta clase se encarga de codificar un texto en base a un arbol de huffman
+ @Author: <Kahyberth Steven Gonzales, Carlos Eduardo Guerrero, Juan Camilo Varela, Yuliana Serna>
+ @Version: <1>
+ */
 class HuffmanCoding {
   private HuffmanBinaryTree tree;
   private Map<Character, String> encodingTable;
@@ -67,12 +74,13 @@ class HuffmanCoding {
     HuffmanNode root = queue.poll();
     tree = new HuffmanBinaryTree(root);
   }
-
+  //Objeto encodingTable limpio
   private void buildEncodingTable() {
     encodingTable = new HashMap<>();
     buildEncodingTableRecursive(tree.getRoot(), "");
   }
 
+  //Se encarga de construir la tabla
   private void buildEncodingTableRecursive(HuffmanNode node, String code) {
     if (node.isLeaf()) {
       encodingTable.put(node.getCharacter(), code);
@@ -82,6 +90,8 @@ class HuffmanCoding {
     }
   }
 
+
+  //Se encarga de contar los nodos del Arbol de Huffman
   private int countNodes(HuffmanNode node) {
     if (node == null) {
       return 0;
@@ -89,6 +99,8 @@ class HuffmanCoding {
     return 1 + countNodes(node.getLeft()) + countNodes(node.getRight());
   }
 
+  //Método para calcular la profundidad
+  //Toma como argumento un nodo en el árbol y devuelve la profundidad del subárbol que tiene a ese nodo como raíz.
   private int calculateDepth(HuffmanNode node) {
     if (node == null) {
       return 0;
@@ -98,15 +110,17 @@ class HuffmanCoding {
     return 1 + Math.max(leftDepth, rightDepth);
   }
 
+  //Método para representar la cantidad de bits necesarios del texto original
   private int calculateOriginalBits() {
     int totalBits = 0;
     for (char c : encodingTable.keySet()) {
       int frequency = getFrequency(c);
-      totalBits += frequency * 16; // Assuming 16-bit ASCII characters
+      totalBits += frequency * 256; // Assuming 16-bit ASCII characters
     }
     return totalBits;
   }
 
+  //Este método se encarga de calcular el número de bits necesarios para representar el texto codificado
   private int calculateCompressedBits() {
     int totalBits = 0;
     for (char c : encodingTable.keySet()) {
@@ -117,8 +131,9 @@ class HuffmanCoding {
     return totalBits;
   }
 
+  //Este metodo se utiliza para obtener la frecuencia de un caracter específico
   private int getFrequency(char c) {
-    int frequency = tree.getRoot().getFrequency();
+    int frequency = tree.getRoot().getFrequency(); //Nodo raiz del arbol de huffman
     HuffmanNode current = tree.getRoot();
     while (!current.isLeaf()) {
       if (current.getLeft() != null && current.getLeft().getCharacter() == c) {
