@@ -115,7 +115,7 @@ class HuffmanCoding {
     int totalBits = 0;
     for (char c : encodingTable.keySet()) {
       int frequency = getFrequency(c);
-      totalBits += frequency * 256; // Assuming 16-bit ASCII characters
+      totalBits += frequency * 256;
     }
     return totalBits;
   }

@@ -80,7 +80,7 @@ public class TestHuffman {
   @Test
   public void testFile1() {
     //Setup
-    //HuffmanCoding coding = new HuffmanCoding();
+
     String text = loadFile("ejemplo1.in");
     HuffmanCoding coding = new HuffmanCoding(text);
     HuffmanDecoding decoding = new HuffmanDecoding();
@@ -98,7 +98,7 @@ public class TestHuffman {
   @Test
   public void testFile2() {
     //Setup
-    //HuffmanCoding coding = new HuffmanCoding();
+
     String text = loadFile("ejemplo2.in");
     HuffmanCoding coding = new HuffmanCoding(text);
     HuffmanDecoding decoding = new HuffmanDecoding();
@@ -116,7 +116,7 @@ public class TestHuffman {
   @Test
   public void testFile3() {
     //Setup
-    //HuffmanCoding coding = new HuffmanCoding();
+
     String text = loadFile("ejemplo3.in");
     HuffmanCoding coding = new HuffmanCoding(text);
     System.out.println(text);
