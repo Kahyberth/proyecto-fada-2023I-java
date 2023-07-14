@@ -1,39 +1,37 @@
-/**
- * Clase que implementa un arbol binario de Huffman
- * @Author: <Estudiantes>
- * @Version: <1>
-*/
-
 package project;
 
-public class HuffmanBinaryTree {
-  private Object key;
-  private HuffmanBinaryTree left;
-  private HuffmanBinaryTree right;
+class HuffmanBinaryTree {
+  private HuffmanNode root;
 
-  /**
-   * Retorna el valor de la llave, si es un string retorna -1, si es un numero retorna el numero.
-   * @return valor de la llave
-   */
-  public int getNumberKey(){
-    throw new UnsupportedOperationException("Aún no implementado");
+  public HuffmanBinaryTree(HuffmanNode root) {
+    this.root = root;
   }
 
-  /**
-   * Retorna el hijo izquierdo del arbol.
-   * @return hijo izquierdo del arbol
-   */
-  public HuffmanBinaryTree getLeft(){
-    throw new UnsupportedOperationException("Aún no implementado");
+  public HuffmanNode getRoot() {
+    return root;
   }
 
-
-  /**
-   * Retorna el hijo derecho del arbol.
-   * @return hijo derecho del arbol
-   */
-  public HuffmanBinaryTree getRight(){
-    throw new UnsupportedOperationException("Aún no implementado");
+  public int getNumberKey() {
+    if (Character.isDigit(root.getCharacter())) {
+      return Character.getNumericValue(root.getCharacter());
+    } else {
+      return -1;
+    }
   }
 
+  public HuffmanBinaryTree getLeft() {
+    if (root.getLeft() != null) {
+      return new HuffmanBinaryTree(root.getLeft());
+    } else {
+      return null;
+    }
+  }
+
+  public HuffmanBinaryTree getRight() {
+    if (root.getRight() != null) {
+      return new HuffmanBinaryTree(root.getRight());
+    } else {
+      return null;
+    }
+  }
 }

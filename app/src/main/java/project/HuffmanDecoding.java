@@ -1,20 +1,21 @@
-/**
- * Clase de decodificacion de Huffman
- * Esta clase se encarga de decodificar un texto en base a un arbol de huffman
- * @Author: <Estudiantes>
- * @Version: <1>
- */
 package project;
 
-public class HuffmanDecoding {
-  
-  /**
-   * Decodifica un texto en base a un arbol de huffman.
-   * @param text texto a decodificar
-   * @param tree arbol de huffman
-   * @return texto decodificado
-   */
-  public String decode(String text, HuffmanBinaryTree tree) {
-    throw new UnsupportedOperationException("Aún no implementado");
+class HuffmanDecoding {
+  public static String decode(String encodedString, HuffmanBinaryTree tree) {
+    StringBuilder decodedString = new StringBuilder();
+    HuffmanNode current = tree.getRoot();
+    for (char bit : encodedString.toCharArray()) {
+      if (bit == '0' && current.getLeft() != null) {
+        current = current.getLeft();
+      } else if (bit == '1' && current.getRight() != null) {
+        current = current.getRight();
+      }
+
+      if (current.isLeaf()) {
+        decodedString.append(current.getCharacter());
+        current = tree.getRoot();
+      }
+    }
+    return decodedString.toString();
   }
 }

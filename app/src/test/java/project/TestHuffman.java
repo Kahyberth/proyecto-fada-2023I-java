@@ -9,7 +9,10 @@ package project;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -58,22 +61,31 @@ public class TestHuffman {
     }
   }
 
-  private String loadFile(String fileName){
-    try{
-      Path filePath = Path.of(classLoader.getResource(fileName).getFile());
-      return Files.readString(filePath, StandardCharsets.UTF_8);
-    }
-    catch(IOException e){
+  private String loadFile(String fileName) {
+    try {
+      InputStream inputStream = classLoader.getResourceAsStream(fileName);
+      BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+
+      StringBuilder stringBuilder = new StringBuilder();
+      String line;
+      while ((line = reader.readLine()) != null) {
+        stringBuilder.append(line);
+        stringBuilder.append("\n");  // Agrega un salto de línea después de cada línea leída
+      }
+
+      reader.close();
+      return stringBuilder.toString();
+    } catch (IOException e) {
       return null;
     }
-
   }
 
   @Test
   public void testFile1() {
     //Setup
-    HuffmanCoding coding = new HuffmanCoding();
+    //HuffmanCoding coding = new HuffmanCoding();
     String text = loadFile("ejemplo1.in");
+    HuffmanCoding coding = new HuffmanCoding(text);
     HuffmanDecoding decoding = new HuffmanDecoding();
 
     //Execute
@@ -89,8 +101,9 @@ public class TestHuffman {
   @Test
   public void testFile2() {
     //Setup
-    HuffmanCoding coding = new HuffmanCoding();
+    //HuffmanCoding coding = new HuffmanCoding();
     String text = loadFile("ejemplo2.in");
+    HuffmanCoding coding = new HuffmanCoding(text);
     HuffmanDecoding decoding = new HuffmanDecoding();
 
     //Execute
@@ -106,8 +119,9 @@ public class TestHuffman {
   @Test
   public void testFile3() {
     //Setup
-    HuffmanCoding coding = new HuffmanCoding();
+    //HuffmanCoding coding = new HuffmanCoding();
     String text = loadFile("ejemplo3.in");
+    HuffmanCoding coding = new HuffmanCoding(text);
     System.out.println(text);
     HuffmanDecoding decoding = new HuffmanDecoding();
 
